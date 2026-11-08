@@ -1,5 +1,8 @@
 # 🚀 GDGoC UGM Web Application
 
+Vercel live: https://gdgoc-study-case-hzny.vercel.app/
+Video drive: on the way (sorry for late - blackout last night)
+
 A responsive, multi-page web platform built for **Google Developer Groups on Campus (GDGoC) Universitas Gadjah Mada**. This platform serves as a hub for students to discover learning tracks, explore community formats, and get involved in tech events.
 
 ---
