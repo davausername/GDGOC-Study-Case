@@ -1,6 +1,3 @@
-import { useState } from "react";
-import { Button } from "../ui/Button";
-
 const STEPS = [
   {
     number: "01",
@@ -35,14 +32,8 @@ const FAQS = [
 ];
 
 export default function BuildAndBelong() {
-  const [openFaq, setOpenFaq] = useState(0);
-
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
-
   return (
-    <div className="w-full space-y-24 py-12">
+    <div className="w-full space-y-16 py-12 sm:space-y-20 sm:py-16">
       
       {/* ---------------- SECTION 1: Feature Showcase ---------------- */}
       <section className="container-custom grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
@@ -179,57 +170,24 @@ export default function BuildAndBelong() {
         </div>
 
         <div className="md:col-span-7 divide-y divide-google-border">
-          {FAQS.map((faq, idx) => (
-            <div key={faq.question} className="py-5">
-              <button
-                onClick={() => toggleFaq(idx)}
-                type="button"
-                className="w-full flex items-center justify-between text-left font-bold text-google-text-main text-base sm:text-lg focus:outline-none"
-              >
+          {FAQS.map((faq) => (
+            <details key={faq.question} className="group py-4" open>
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-bold text-google-text-main marker:hidden sm:text-lg">
                 <span>{faq.question}</span>
-                <span className="text-google-blue ml-4 text-xl transform transition-transform duration-200">
-                  {openFaq === idx ? "↑" : "↓"}
+                <span
+                  className="text-google-blue transition-transform group-open:rotate-180"
+                  aria-hidden="true"
+                >
+                  ↓
                 </span>
-              </button>
-              {openFaq === idx && (
-                <p className="text-sm text-google-text-sub mt-3 leading-relaxed">
-                  {faq.answer}
-                </p>
-              )}
-            </div>
+              </summary>
+              <p className="mt-3 text-sm leading-relaxed text-google-text-sub">
+                {faq.answer}
+              </p>
+            </details>
           ))}
         </div>
       </section>
-
-      {/* ---------------- SECTION 5: Final CTA Callout Banner ---------------- */}
-      <section className="container-custom">
-        <div className="bg-google-blue-light rounded-3xl p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="space-y-3 text-center md:text-left max-w-xl">
-            <div className="flex items-center justify-center md:justify-start gap-2">
-              <span className="w-2 h-2 rounded-full bg-google-blue inline-block" />
-              <p className="text-xs font-semibold tracking-wider uppercase text-google-blue-hover">
-                YOUR NEXT CHAPTER
-              </p>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-google-text-main leading-tight">
-              Bring your curiosity.<br />We’ll build from there.
-            </h2>
-            <p className="text-sm sm:text-base text-google-text-sub">
-              Find a learning track, meet a collaborator, or start a conversation.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0 justify-center items-center">
-            <Button href="#tracks" variant="primary">
-              Explore the overview →
-            </Button>
-            <a href="#community" className="text-sm font-semibold text-google-blue hover:underline px-4 py-2">
-              Talk to the community →
-            </a>
-          </div>
-        </div>
-      </section>
-
     </div>
   );
 }

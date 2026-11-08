@@ -1,106 +1,105 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useFetch } from "../../hooks/useFetch";
-import { Skeleton } from "../ui/Skeleton";
+import { Link, useLocation } from "react-router-dom";
+import gdgocLogo from "../../assets/img/GDGoC_UGM_identity.svg";
 import { Button } from "../ui/Button";
 
-import gdgocLogo from "../../assets/img/GDGoC_UGM_identity.svg";
+const LINKS = [
+  { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
+  { label: "Overview", to: "/#tracks", hash: "#tracks" },
+  { label: "Contact", to: "/#contact", hash: "#contact" },
+];
 
 export default function NavBar() {
-  const { data, loading } = useFetch("/navigation");
   const [isOpen, setIsOpen] = useState(false);
+  const { pathname, hash } = useLocation();
 
   const closeMenu = () => setIsOpen(false);
+  const isActive = (link) =>
+    link.hash
+      ? pathname === "/" && hash === link.hash
+      : pathname === link.to;
+
+  const renderLinks = (mobile = false) =>
+    LINKS.map((link) => (
+      <li key={link.label}>
+        <Link
+          to={link.to}
+          onClick={closeMenu}
+          aria-current={isActive(link) ? "page" : undefined}
+          className={`block rounded-full px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-google-blue ${
+            isActive(link)
+              ? "bg-google-blue-light text-google-blue-hover"
+              : "text-google-text-sub hover:bg-google-bg-surface hover:text-google-text-main"
+          } ${mobile ? "w-full" : ""}`}
+        >
+          {link.label}
+        </Link>
+      </li>
+    ));
 
   return (
-    <nav className="relative w-full border-b border-google-border bg-white z-50">
-      <div className="container-custom flex items-center justify-between h-20 sm:h-24">
-        
-        {/* Brand Logo */}
-        <Link to="/" onClick={closeMenu} className="flex items-center">
-          <img 
-            src={gdgocLogo} 
-            alt="GDGoC UGM Identity" 
-            className="h-8 sm:h-9 w-auto object-contain" 
+    <header className="relative z-50 border-b border-google-border bg-white">
+      <nav
+        className="container-custom flex min-h-16 items-center justify-between gap-4 sm:min-h-[4.5rem]"
+        aria-label="Main navigation"
+      >
+        <Link
+          to="/"
+          onClick={closeMenu}
+          className="shrink-0 rounded focus-visible:outline-2 focus-visible:outline-google-blue"
+        >
+          <img
+            src={gdgocLogo}
+            alt="Google Developer Groups on Campus, Universitas Gadjah Mada"
+            className="h-8 w-auto sm:h-9"
           />
         </Link>
 
-        {/* Desktop Links & CTA */}
-        <div className="hidden md:flex items-center gap-6">
-          <ul className="flex items-center gap-2">
-            {loading ? (
-              <li className="flex gap-4">
-                <Skeleton className="h-4 w-16" />
-                <Skeleton className="h-4 w-16" />
-              </li>
-            ) : (
-              data?.data?.map((item) => (
-                <li key={item.href}>
-                  <Link 
-                    to={item.href} 
-                    className="inline-block px-4 py-2 rounded-md text-sm font-medium text-google-text-main hover:text-google-blue hover:bg-google-blue-light transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))
-            )}
-          </ul>
-
-          <Button href="#tracks" variant="primary">
+        <div className="hidden items-center gap-5 md:flex">
+          <ul className="flex items-center gap-1">{renderLinks()}</ul>
+          <Button href="/#tracks" variant="primary">
             Find your track
           </Button>
         </div>
 
-        {/* Mobile Hamburger Button */}
         <button
-          onClick={() => setIsOpen((prev) => !prev)}
           type="button"
-          aria-label="Toggle navigation menu"
-          className="md:hidden p-2 rounded-lg text-google-text-sub hover:bg-google-bg-surface focus:outline-none"
+          onClick={() => setIsOpen((open) => !open)}
+          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-google-text-main transition-colors hover:bg-google-bg-surface focus-visible:outline-2 focus-visible:outline-google-blue md:hidden"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-            />
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            className="h-6 w-6"
+            aria-hidden="true"
+          >
+            {isOpen ? (
+              <path d="m6 6 12 12M18 6 6 18" />
+            ) : (
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            )}
           </svg>
         </button>
-      </div>
+      </nav>
 
-      {/* Mobile Drawer (Renders when hamburger is toggled) */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-google-border shadow-lg p-6 space-y-4">
-          <ul className="flex flex-col space-y-2">
-            {loading ? (
-              <li className="space-y-2">
-                <Skeleton className="h-6 w-32" />
-                <Skeleton className="h-6 w-32" />
-              </li>
-            ) : (
-              data?.data?.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    to={item.href}
-                    onClick={closeMenu}
-                    className="block py-2 text-base font-medium text-google-text-main hover:text-google-blue transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))
-            )}
-          </ul>
-
-          <div className="pt-4 border-t border-google-border/60">
-            <Button href="#tracks" variant="primary" className="w-full text-center">
-              Find your track
-            </Button>
-          </div>
+        <div
+          id="mobile-navigation"
+          className="absolute inset-x-0 top-full border-b border-google-border bg-white p-4 shadow-lg md:hidden"
+        >
+          <ul className="flex flex-col gap-1">{renderLinks(true)}</ul>
+          <Button href="/#tracks" variant="primary" className="mt-3 w-full">
+            Find your track
+          </Button>
         </div>
       )}
-    </nav>
+    </header>
   );
 }

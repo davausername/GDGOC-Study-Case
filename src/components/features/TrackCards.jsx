@@ -2,6 +2,15 @@
 import { useFetch } from "../../hooks/useFetch";
 import { TrackCard } from "../ui/TrackCard";
 import { Skeleton } from "../ui/Skeleton";
+import searchIllustration from "../../assets/img/searchIllustration.svg";
+import paintIllustration from "../../assets/img/paintIllustration.svg";
+import codeIllustration from "../../assets/img/codeIllustration.svg";
+
+const TRACK_ILLUSTRATIONS = {
+  "research-discovery": searchIllustration,
+  "design-creativity": paintIllustration,
+  development: codeIllustration,
+};
 
 export default function TrackCards() {
   const { data, loading, error } = useFetch("/tracks");
@@ -11,7 +20,7 @@ export default function TrackCards() {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+    <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
       {loading ? (
         Array.from({ length: 3 }).map((_, i) => (
           <div key={i} className="h-105 rounded-2xl border border-google-border p-6 space-y-4 bg-white">
@@ -25,13 +34,13 @@ export default function TrackCards() {
       ) : (
         data?.data?.map((track) => (
           <TrackCard
-            key={track.id || track.title}
-            badge={track.badge || track.category}
-            title={track.title}
+            key={track.id}
+            badge={track.tagline}
+            title={track.name}
             description={track.description}
-            topics={track.topics}
-            href={track.href || `#${track.id}`}
-            imageSrc={track.image || track.icon_url}
+            topics={track.skills?.join(" · ")}
+            href="/#tracks"
+            imageSrc={TRACK_ILLUSTRATIONS[track.id]}
           />
         ))
       )}

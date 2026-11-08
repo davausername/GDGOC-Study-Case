@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { fetchApi } from "../services/api";
 
 interface FetchState<T> {
+  endpoint: string;
   data: T | null;
   loading: boolean;
   error: string | null;
@@ -9,27 +10,35 @@ interface FetchState<T> {
 
 export function useFetch<T>(endpoint: string) {
   const [state, setState] = useState<FetchState<T>>({
+    endpoint,
     data: null,
     loading: true,
     error: null,
   });
 
   useEffect(() => {
-    let isMounted = true;
-    setState({ data: null, loading: true, error: null });
+    const controller = new AbortController();
 
-    fetchApi<T>(endpoint)
+    fetchApi<T>(endpoint, controller.signal)
       .then((data) => {
-        if (isMounted) setState({ data, loading: false, error: null });
+        setState({ endpoint, data, loading: false, error: null });
       })
-      .catch((err: Error) => {
-        if (isMounted) setState({ data: null, loading: false, error: err.message });
+      .catch((error: unknown) => {
+        if (controller.signal.aborted) return;
+        setState({
+          endpoint,
+          data: null,
+          loading: false,
+          error: error instanceof Error ? error.message : String(error),
+        });
       });
 
     return () => {
-      isMounted = false;
+      controller.abort();
     };
   }, [endpoint]);
 
-  return state;
+  return state.endpoint === endpoint
+    ? state
+    : { data: null, loading: true, error: null };
 }

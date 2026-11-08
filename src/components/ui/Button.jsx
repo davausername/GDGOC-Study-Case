@@ -1,22 +1,38 @@
 import Arrow from '../../assets/img/Arrow.svg';
+import { Link } from "react-router-dom";
 
-export function Button({ children, href = "#", variant = "primary", className = "" }) {
+const VARIANTS = {
+  primary:
+    "bg-google-blue px-4 py-2 text-white shadow-sm hover:bg-google-blue-hover",
+  secondary:
+    "bg-google-bg-surface px-4 py-2 text-google-text-main hover:bg-google-border",
+  outline:
+    "border border-google-border px-4 py-2 text-google-text-main hover:bg-google-bg-surface",
+  text: "px-0 py-2 text-google-blue-hover hover:underline",
+};
 
-    const baseStyles = "inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold rounded-lg transition-colors whitespace-nowrap shadow-sm";
+export function Button({
+  children,
+  href = "#",
+  variant = "primary",
+  className = "",
+}) {
+  const variantStyles = VARIANTS[variant] ?? VARIANTS.primary;
+  const classNames = `inline-flex min-h-10 items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-google-blue ${variantStyles} ${className}`;
+  const content = (
+    <>
+      <span>{children}</span>
+      <img src={Arrow} alt="" aria-hidden="true" className="h-4 w-4 shrink-0" />
+    </>
+  );
 
-    const variants = {
-        primary: "bg-[#4284F4] text-white hover:bg-blue-400",
-        secondary: "bg-gray-100 text-gray-800 hover:bg-gray-200",
-        outline: "border border-gray-300 text-gray-700 hover:bg-gray-50"
-    };
-
-    return (
-    <a 
-      href={href} 
-      className={`${baseStyles} ${variants[variant]} ${className}`}
-    >
-      {children}
-      <img src={Arrow} alt="" aria-hidden="true" className="w-4 h-4 shrink-0" />
+  return href.startsWith("/") || href.startsWith("#") ? (
+    <Link to={href} className={classNames}>
+      {content}
+    </Link>
+  ) : (
+    <a href={href} className={classNames}>
+      {content}
     </a>
   );
 }
