@@ -1,8 +1,24 @@
 @import "tailwindcss";
 
+@theme {
+  /* Google Brand Colors */
+  --color-google-blue: #4285F4;
+  --color-google-blue-hover: #1967D2;
+  --color-google-blue-light: #EAF2FF;
+  --color-google-red: #EA4335;
+  --color-google-yellow: #FBBC04;
+  --color-google-green: #34A853;
+
+  /* Google Design System Neutrals */
+  --color-google-text-main: #202124;
+  --color-google-text-sub: #5F6368;
+  --color-google-border: #DADCE0;
+  --color-google-bg-surface: #F1F3F4;
+}
+
 @font-face {
   font-family: 'Google Sans';
-  src: url('/assets/font/Google_Sans/GoogleSans-VariableFont_GRAD,opsz,wght.ttf') format('truetype');
+  src: url('./assets/font/Google_Sans/GoogleSans-VariableFont_GRAD,opsz,wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -10,7 +26,7 @@
 
 @font-face {
   font-family: 'Google Sans';
-  src: url('/assets/font/Google_Sans/GoogleSans-Italic-VariableFont_GRAD,opsz,wght.ttf') format('truetype');
+  src: url('./assets/font/Google_Sans/GoogleSans-Italic-VariableFont_GRAD,opsz,wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
@@ -24,6 +40,6 @@
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }

@@ -10,7 +10,7 @@ export default function Footer() {
   const { data, loading } = useFetch("/navigation");
 
   return (
-    <footer className="w-full border-t border-[#DADCE0] bg-[#F1F3F4] py-12">
+    <footer className="w-full border-t border-google-border bg-google-bg-surface py-12">
       {/* 1. Aligned to the 1200px layout container */}
       <div className="container-custom flex flex-col md:flex-row justify-between items-start gap-10">
         
@@ -23,7 +23,7 @@ export default function Footer() {
         
         {/* Navigation Links Column */}
         <div className="space-y-3">
-          <h4 className="text-sm font-bold text-[#202124]">Explore</h4>
+          <h4 className="text-sm font-bold text-google-text-main">Explore</h4>
           <ul className="flex flex-col gap-2">
             {loading ? (
               <li className="space-y-2">
@@ -36,7 +36,7 @@ export default function Footer() {
                 <li key={item.href}>
                   <a 
                     href={item.href} 
-                    className="text-sm font-medium text-[#5F6368] hover:text-[#1967D2] transition-colors"
+                    className="text-sm font-medium text-google-text-sub hover:text-google-blue-hover transition-colors"
                   >
                     {item.label}
                   </a>
@@ -48,14 +48,14 @@ export default function Footer() {
 
         {/* Social / Info Column */}
         <div className="space-y-3">
-          <h4 className="text-sm font-bold text-[#202124]">Keep in loop</h4>
+          <h4 className="text-sm font-bold text-google-text-main">Keep in loop</h4>
           
           <div className="flex flex-col space-y-2">
             <a 
               href="https://instagram.com/gdgoc.ugm" 
               target="_blank" 
               rel="noreferrer" 
-              className="text-sm font-medium text-[#1967D2] hover:underline"
+              className="text-sm font-medium text-google-blue-hover hover:underline"
             >
               @gdgoc.ugm
             </a>
@@ -83,13 +83,13 @@ export default function Footer() {
             </div>
           </div>
 
-          <p className="text-xs text-[#5F6368]">Learn together. Build together.</p>
+          <p className="text-xs text-google-text-sub">Learn together. Build together.</p>
         </div>
       </div>
 
       {/* Bottom Bar & Signature */}
-      <div className="container-custom mt-10 pt-6 border-t border-[#DADCE0] flex flex-col items-center gap-6">
-        <div className="w-full flex flex-col md:flex-row justify-between items-center text-xs text-[#5F6368] gap-2">
+      <div className="container-custom mt-10 pt-[40px] border-t border-google-border flex flex-col items-center gap-6">
+        <div className="w-full flex flex-col md:flex-row justify-between items-center text-xs text-google-text-sub gap-2">
           <div>
             <p>© GDGoC Universitas Gadjah Mada • 2026/2027</p>
             <img src={brandSignature} alt="GDGoC Brand Signature" className="inline-block pt-5" />

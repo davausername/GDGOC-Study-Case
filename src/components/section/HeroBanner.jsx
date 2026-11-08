@@ -9,15 +9,15 @@ export default function HeroBanner() {
         
         {/* Left Column: Text & CTAs */}
         <section className="flex-1 max-w-2xl space-y-6">
-          <ul className="text-sm font-semibold tracking-wide text-[#5F6368]">
+          <ul className="text-sm font-semibold tracking-wide text-google-text-sub">
             <li>GDGoC UGM • 2026/2027</li>
           </ul>
 
           <h1 className="text-4xl sm:text-6xl lg:text-[80px] font-bold text-gray-900 leading-[1.1] tracking-tight">
-            Big ideas.<br /><span className="text-[#1967D2]">Built together.</span>
+            Big ideas.<br /><span className="text-google-blue-hover">Built together.</span>
           </h1>
 
-          <p className="text-lg sm:text-[21px] text-[#5F6368] leading-relaxed">
+          <p className="text-lg sm:text-[21px] text-google-text-sub leading-relaxed">
             A place for curious minds at Universitas Gadjah Mada to learn, connect, and build technology that matters.
           </p>
           
@@ -26,7 +26,7 @@ export default function HeroBanner() {
             <Button href="#about" variant="outline">Get to know us</Button>
           </div>
 
-          <p className="text-sm text-[#5F6368]">Different backgrounds. A shared curiosity.</p> 
+          <p className="text-sm text-google-text-sub">Different backgrounds. A shared curiosity.</p> 
         </section>
 
         {/* Right Column: Hero Graphic */}
@@ -48,7 +48,7 @@ export default function HeroBanner() {
               Learn by doing
             </li>
             <li className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-[#34A853] inline-block sm:inline" />
+              <span className="w-2 h-2 bg-google-green inline-block sm:inline" />
               Connect across disciplines
             </li>
             <li className="flex items-center gap-2">

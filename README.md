@@ -1,75 +1,39 @@
-# React + TypeScript + Vite
+# 🚀 GDGoC UGM Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive, multi-page web platform built for **Google Developer Groups on Campus (GDGoC) Universitas Gadjah Mada**. This platform serves as a hub for students to discover learning tracks, explore community formats, and get involved in tech events.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠️ Tech Stack & Design System
 
-## React Compiler
+* **Framework:** React (Vite)
+* **Routing:** React Router v6+
+* **Styling:** Tailwind CSS v4 (Mobile-First, Google Design System Design Tokens)
+* **Architecture:** Modular Component Structure (`pages/`, `components/layout/`, `components/ui/`, `components/features/`, `hooks/`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* **Multi-Page Routing:** Seamless navigation between Home, About, and Track pages using a shared `RootLayout` shell.
+* **Dynamic Data Fetching:** Custom `useFetch` hook handling API integrations for navigation and learning tracks.
+* **Skeleton Loading:** Custom UI skeleton loaders during network request states.
+* **Mobile-First Responsive Design:** Fully responsive layout optimized for all viewports, down to 320px mini-mobile screens.
+* **Google Design Tokens:** Standardized 1200px container (`container-custom`) with customized brand color variables (`google-blue`, `google-green`, etc.).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📁 Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+```text
+src/
+├── assets/             # Brand logos, graphics, and SVG icons
+├── components/
+│   ├── layout/         # RootLayout, NavBar, Footer
+│   ├── ui/             # Primitive UI components (Button, TrackCard, ValueCard, Skeleton)
+│   └── features/       # Data-driven components (TrackCards, DiscoverLearning)
+├── hooks/              # Custom React hooks (useFetch)
+├── pages/              # Page views (Home.jsx, About.jsx)
+├── App.jsx             # React Router configuration
+├── main.jsx            # Application entry point & root mount
+└── index.css           # Tailwind v4 theme tokens & container utilities
