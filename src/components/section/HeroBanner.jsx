@@ -4,7 +4,7 @@ import { Button } from '../ui/Button';
 export default function HeroBanner() {
   return (
     <header className="w-full bg-white">
-      <div className="container-custom grid grid-cols-1 items-center gap-8 py-8 sm:gap-10 sm:py-12 lg:grid-cols-2 lg:gap-12 lg:py-14">
+      <div className="container-custom grid grid-cols-1 items-center gap-6 pt-8 pb-2 min-[620px]:grid-cols-2 min-[620px]:gap-8 min-[620px]:py-10 lg:gap-12 lg:py-14">
         <div className="space-y-5 sm:space-y-6">
           <p className="section-eyebrow">GDGoC UGM · 2026/2027</p>
           <h1 className="text-4xl font-bold leading-[1.05] tracking-tight text-google-text-main sm:text-5xl lg:text-6xl xl:text-7xl">
@@ -33,11 +33,11 @@ export default function HeroBanner() {
             Different backgrounds. A shared curiosity.
           </p>
         </div>
-        <div className="w-full">
+        <div className="flex w-full justify-start">
           <img
             src={HeroImg}
             alt="Illustration of creative ideas coming together"
-            className="mx-auto max-h-[420px] w-full max-w-[560px] rounded-3xl object-cover lg:max-h-[460px]"
+            className="block h-auto w-full max-w-[400px] rounded-3xl min-[620px]:max-w-[560px]"
           />
         </div>
       </div>

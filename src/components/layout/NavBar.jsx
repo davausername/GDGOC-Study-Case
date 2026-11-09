@@ -41,24 +41,24 @@ export default function NavBar() {
   return (
     <header className="relative z-50 border-b border-google-border bg-white">
       <nav
-        className="container-custom flex min-h-16 items-center justify-between gap-4 sm:min-h-[4.5rem]"
+        className="container-custom flex min-h-16 items-center justify-between gap-2 sm:min-h-[4.5rem] sm:gap-4"
         aria-label="Main navigation"
       >
         <Link
           to="/"
           onClick={closeMenu}
-          className="shrink-0 rounded focus-visible:outline-2 focus-visible:outline-google-blue"
+          className="min-w-0 shrink rounded focus-visible:outline-2 focus-visible:outline-google-blue"
         >
           <img
             src={gdgocLogo}
             alt="Google Developer Groups on Campus, Universitas Gadjah Mada"
-            className="h-8 w-auto sm:h-9"
+            className="h-8 w-[min(220px,68vw)] object-contain sm:h-9 sm:w-[min(280px,48vw)] lg:w-auto"
           />
         </Link>
 
-        <div className="hidden items-center gap-5 md:flex">
-          <ul className="flex items-center gap-1">{renderLinks()}</ul>
-          <Button href="/#tracks" variant="primary">
+        <div className="hidden shrink-0 items-center gap-3 lg:flex xl:gap-5">
+          <ul className="flex items-center gap-0 xl:gap-1">{renderLinks()}</ul>
+          <Button href="/#tracks" variant="primary" className="whitespace-nowrap">
             Find your track
           </Button>
         </div>
@@ -69,7 +69,7 @@ export default function NavBar() {
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isOpen}
           aria-controls="mobile-navigation"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-google-text-main transition-colors hover:bg-google-bg-surface focus-visible:outline-2 focus-visible:outline-google-blue md:hidden"
+          className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-google-text-main transition-colors hover:bg-google-bg-surface focus-visible:outline-2 focus-visible:outline-google-blue lg:hidden"
         >
           <svg
             viewBox="0 0 24 24"
@@ -92,10 +92,14 @@ export default function NavBar() {
       {isOpen && (
         <div
           id="mobile-navigation"
-          className="absolute inset-x-0 top-full border-b border-google-border bg-white p-4 shadow-lg md:hidden"
+          className="absolute inset-x-0 top-full border-b border-google-border bg-white p-4 shadow-lg lg:hidden"
         >
           <ul className="flex flex-col gap-1">{renderLinks(true)}</ul>
-          <Button href="/#tracks" variant="primary" className="mt-3 w-full">
+          <Button
+            href="/#tracks"
+            variant="primary"
+            className="mt-3 w-full whitespace-nowrap"
+          >
             Find your track
           </Button>
         </div>
