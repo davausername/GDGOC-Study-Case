@@ -5,46 +5,52 @@ export function TrackCard({
   topics,
   href = "#",
   imageSrc,
+  imageBackgroundColor = "#fff",
 }) {
   return (
     <a
       href={href}
-      className="group flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-google-border bg-white p-4 transition-shadow duration-200 hover:shadow-md sm:p-5"
+      className="group flex h-full min-h-[515px] flex-col overflow-hidden rounded-3xl border border-google-border bg-white transition-shadow duration-200 hover:shadow-md"
     >
-      <div className="space-y-3">
-        <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-xl bg-google-bg-surface">
-          <img
-            src={imageSrc}
-            alt=""
-            aria-hidden="true"
-            className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
-          />
-        </div>
-        <p className="text-[0.6rem] font-semibold tracking-wide uppercase text-google-blue">
+      <div
+        className="flex h-[220px] w-full shrink-0 justify-center overflow-hidden"
+        style={{ backgroundColor: imageBackgroundColor }}
+      >
+        <img
+          src={imageSrc}
+          alt=""
+          aria-hidden="true"
+          className="block h-auto w-full max-w-[400px] shrink-0 self-start transition-transform duration-300 group-hover:scale-[1.02]"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <p className="text-[0.65rem] font-semibold tracking-wide uppercase text-google-blue">
           {badge}
         </p>
-        <div className="space-y-1.5">
-          <h3 className="text-lg font-bold text-google-text-main transition-colors group-hover:text-google-blue-hover">
+        <div className="mt-4">
+          <h3 className="text-xl font-bold leading-tight text-google-text-main transition-colors group-hover:text-google-blue-hover sm:text-[1.65rem]">
             {title}
           </h3>
-          <p className="text-xs leading-relaxed text-google-text-sub sm:text-sm">
+          <p className="mt-4 text-base leading-6 text-google-text-sub">
             {description}
           </p>
         </div>
-      </div>
-      <div className="mt-4 space-y-3 border-t border-google-border pt-3">
-        <p className="text-[0.65rem] leading-relaxed text-google-text-sub">
-          {topics}
-        </p>
-        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-google-blue group-hover:underline">
-          Explore this track
-          <span
-            className="transition-transform group-hover:translate-x-1"
-            aria-hidden="true"
-          >
-            →
-          </span>
-        </span>
+        <div className="mt-auto pt-5">
+          <div className="border-t border-google-border pt-4">
+            <p className="text-[0.8rem] leading-5 text-google-text-sub">
+              {topics}
+            </p>
+            <span className="mt-3 inline-flex items-center gap-2 text-base font-semibold text-google-blue">
+              Explore this track
+              <span
+                className="transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </span>
+          </div>
+        </div>
       </div>
     </a>
   );
