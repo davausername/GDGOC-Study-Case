@@ -1,42 +1,70 @@
-# 🚀 GDGoC UGM Web Application
+# GDGoC UGM Web Application
 
-Vercel live: https://gdgoc-study-case-hzny.vercel.app/
-Video drive: on the way (sorry for late - blackout last night)
+A responsive website for **Google Developer Groups on Campus, Universitas Gadjah Mada**. Visitors can learn about the community, explore learning tracks, and find ways to take part.
 
-A responsive, multi-page web platform built for **Google Developer Groups on Campus (GDGoC) Universitas Gadjah Mada**. This platform serves as a hub for students to discover learning tracks, explore community formats, and get involved in tech events.
+**Live site:** [gdgoc-study-case-hzny.vercel.app](https://gdgoc-study-case-hzny.vercel.app/)
 
----
+## Tech stack
 
-## 🛠️ Tech Stack & Design System
+- React 19 with Vite 8
+- React Router 7
+- Tailwind CSS 4 through the Vite plugin
+- TypeScript for API types and shared data utilities; JSX for the UI
+- Google Sans and GDGoC UGM brand artwork
 
-* **Framework:** React (Vite)
-* **Routing:** React Router v6+
-* **Styling:** Tailwind CSS v4 (Mobile-First, Google Design System Design Tokens)
-* **Architecture:** Modular Component Structure (`pages/`, `components/layout/`, `components/ui/`, `components/features/`, `hooks/`)
+## Features
 
----
+- Responsive home and about pages with shared navigation and footer
+- Learning-track cards loaded from the GDGoC UGM API
+- Loading skeletons and an error message for track requests
+- Track-specific illustrations and Google-inspired color and layout tokens
+- Mobile navigation and a not-found route
 
-## ✨ Features
+The track API is requested from `https://gdgoc-ugm-api.vercel.app/api/tracks`. The tracks section needs network access to load its data.
 
-* **Multi-Page Routing:** Seamless navigation between Home, About, and Track pages using a shared `RootLayout` shell.
-* **Dynamic Data Fetching:** Custom `useFetch` hook handling API integrations for navigation and learning tracks.
-* **Skeleton Loading:** Custom UI skeleton loaders during network request states.
-* **Mobile-First Responsive Design:** Fully responsive layout optimized for all viewports, down to 320px mini-mobile screens.
-* **Google Design Tokens:** Standardized 1200px container (`container-custom`) with customized brand color variables (`google-blue`, `google-green`, etc.).
+## Getting started
 
----
+From this directory:
 
-## 📁 Project Structure
+```bash
+npm install
+npm run dev
+```
+
+Vite prints the local development URL in the terminal.
+
+## Available scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the Vite development server |
+| `npm run build` | Type-check and create a production build in `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint |
+
+## Routes
+
+| Path | Page |
+| --- | --- |
+| `/` | Home: community introduction, learning tracks, and ways to learn together |
+| `/about` | About GDGoC UGM |
+| Other paths | Not-found page |
+
+## Project structure
 
 ```text
 src/
-├── assets/             # Brand logos, graphics, and SVG icons
+├── assets/                 # Fonts, brand artwork, and track illustrations
 ├── components/
-│   ├── layout/         # RootLayout, NavBar, Footer
-│   ├── ui/             # Primitive UI components (Button, TrackCard, ValueCard, Skeleton)
-│   └── features/       # Data-driven components (TrackCards, DiscoverLearning)
-├── hooks/              # Custom React hooks (useFetch)
-├── pages/              # Page views (Home.jsx, About.jsx)
-├── App.jsx             # React Router configuration
-├── main.jsx            # Application entry point & root mount
-└── index.css           # Tailwind v4 theme tokens & container utilities
+│   ├── features/           # API-backed track cards
+│   ├── layout/             # Navigation and footer
+│   ├── section/            # Home-page sections
+│   └── ui/                 # Buttons, cards, and skeleton loader
+├── hooks/                  # Data-fetching hook
+├── pages/                  # Home and About pages
+├── services/               # API client
+├── types/                  # API response types
+├── App.jsx                 # Routes and shared page layout
+├── main.jsx                # React application entry point
+└── index.css               # Tailwind import, theme tokens, and utilities
+```

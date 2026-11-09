@@ -12,12 +12,12 @@ export function TrackCard({
       className="group flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-google-border bg-white p-4 transition-shadow duration-200 hover:shadow-md sm:p-5"
     >
       <div className="space-y-3">
-        <div className="flex h-36 w-full items-center justify-center overflow-hidden rounded-xl bg-google-bg-surface sm:h-40">
+        <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-xl bg-google-bg-surface">
           <img
             src={imageSrc}
             alt=""
             aria-hidden="true"
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
           />
         </div>
         <p className="text-[0.6rem] font-semibold tracking-wide uppercase text-google-blue">
